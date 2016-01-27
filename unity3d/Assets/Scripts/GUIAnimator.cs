@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Animator : MonoBehaviour {
+public class GUIAnimator : MonoBehaviour {
 
 	public float xStartPosition = -1.0f;
 	public float xEndPosition = 0.5f;
