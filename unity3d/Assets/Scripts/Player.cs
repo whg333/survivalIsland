@@ -140,12 +140,18 @@ public class Player : MonoBehaviour {
 			
 			if(hit){
 				Transform gameObj = Instantiate(fx, hitInfo.point, hitInfo.transform.rotation) as Transform;
-				if(hitInfo.collider.gameObject.tag == "enemy"){
+				string colliderTag = hitInfo.collider.gameObject.tag;
+				if (colliderTag == "enemy") {
 					hitInfo.collider.gameObject.SendMessage ("OnDamage", 1);
-				}else if(hitInfo.collider.gameObject.tag == "terrain"){
+				} else {
 					ParticleSystem particleSystem = gameObj.GetComponentInChildren<ParticleSystem>();
-					particleSystem.startColor = Color.grey;
+					if(colliderTag == "terrain"){
+						particleSystem.startColor = Color.grey;
+					}else{
+						particleSystem.startColor = Color.gray;
+					}
 				}
+
 			}
 		}
 	}
