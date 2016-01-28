@@ -1,14 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CoconutThrower.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GUIManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Player.cs" Line="140" Column="4" />
-      <File FileName="Assets\Scripts\GUIManager.cs" Line="124" Column="27" />
+      <File FileName="Assets\Scripts\GUIManager.cs" Line="26" Column="28" />
+      <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Zombie.cs" Line="19" Column="2" />
-      <File FileName="Assets\Scripts\Inventory.cs" Line="80" Column="40" />
-      <File FileName="Assets\Scripts\ZombieGenerator.cs" Line="31" Column="104" />
-      <File FileName="Assets\Scripts\CoconutThrower.cs" Line="27" Column="2" />
+      <File FileName="Assets\Scripts\Zombie.cs" Line="178" Column="37" />
+      <File FileName="Assets\Scripts\Inventory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ZombieGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CoconutThrower.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\StartGame.cs" Line="21" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

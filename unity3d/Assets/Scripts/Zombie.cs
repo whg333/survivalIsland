@@ -105,7 +105,7 @@ public class Zombie : MonoBehaviour {
 
 		}else if(InState(state, "death")){
 			CapsuleColliderDisable();
-			if (AninatorPlayLargerThan (state, 5)) {
+			if (AninatorPlayLargerThan (state, 2)) {
 				OnDeath();
 			}
 		}
@@ -157,6 +157,10 @@ public class Zombie : MonoBehaviour {
 	}
 
 	void OnDamage(int damage){
+		if(IsDeath()){
+			return;
+		}
+
 		hp -= damage;
 
 		if(IsDeath()){
@@ -171,9 +175,9 @@ public class Zombie : MonoBehaviour {
 	}
 
 	void OnDeath(){
+		GUIManager.instance.AddScore(100);
 		generator.DecrCount();
 		Destroy(this.gameObject);
-		GUIManager.instance.AddScore(100);
 	}
 
 }
