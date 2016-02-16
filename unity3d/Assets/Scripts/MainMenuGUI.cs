@@ -78,6 +78,10 @@ public class MainMenuGUI : MonoBehaviour {
 			if(GUI.Button(new Rect(quitBtn), "僵尸版")){
 				StartCoroutine("ButtonAction", "SurvivalIsland");
 			}
+			if(GUI.Button(new Rect(instBtn), "返回上一级")){
+				PlayBeepSound();
+				menuPage = "main";
+			}
 		}
 
 		GUI.EndGroup();
