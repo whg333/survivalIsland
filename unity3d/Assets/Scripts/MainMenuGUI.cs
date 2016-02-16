@@ -41,7 +41,9 @@ public class MainMenuGUI : MonoBehaviour {
 		if(menuPage == "main"){
 			if(Application.CanStreamedLevelBeLoaded ("IsLand")){
 				if (GUI.Button (new Rect(playBtn), "开始")) {
-					StartCoroutine("ButtonAction", "Island");
+					//StartCoroutine("ButtonAction", "Island");
+					PlayBeepSound();
+					menuPage = "start";
 				}
 			}else{
 				float percentLoaded = Application.GetStreamProgressForLevel(1) * 100;
@@ -68,6 +70,13 @@ public class MainMenuGUI : MonoBehaviour {
 			if(GUI.Button(new Rect(quitBtn), "返回")){
 				PlayBeepSound();
 				menuPage = "main";
+			}
+		}else if(menuPage == "start"){
+			if (GUI.Button (new Rect(playBtn), "阳光版")) {
+				StartCoroutine("ButtonAction", "Island");
+			}
+			if(GUI.Button(new Rect(quitBtn), "僵尸版")){
+				StartCoroutine("ButtonAction", "SurvivalIsland");
 			}
 		}
 

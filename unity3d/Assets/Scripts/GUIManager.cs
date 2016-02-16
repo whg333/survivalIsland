@@ -25,22 +25,34 @@ public class GUIManager : MonoBehaviour {
 	private GUIText hiScoreText;
 	private GUIText scoreText;
 
+	private Camera mapCamera;
+
 	// Use this for initialization
 	void Start () {
 		instance = this;
+
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+		GameObject mapCameraObj = GameObject.FindGameObjectWithTag ("mapCamera");
+		if(mapCameraObj != null){
+			mapCamera = mapCameraObj.GetComponent<Camera>();
+			mapCamera.enabled = false;
+		}
 
 		GUITexture[] hudGUIs = GetComponentsInChildren<GUITexture>();
 		powerImg = hudGUIs[0];
 		crosshairImg = hudGUIs[1];
 		matchImg = hudGUIs[2];
 
-		GUIText[] guiText = this.GetComponentsInChildren<GUIText>();
+		GUIText[] guiText = GetComponentsInChildren<GUIText>();
 		hintsText = guiText[0];
-		hpText = guiText[1];
-		bulletText = guiText[2];
-		hiScoreText = guiText[3];
-		scoreText = guiText[4];
+
+		if (mapCamera != null) {
+			hpText = guiText [1];
+			bulletText = guiText [2];
+			hiScoreText = guiText [3];
+			scoreText = guiText [4];
+		}
 	}
 	
 	// Update is called once per frame
@@ -103,6 +115,9 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	void OnGUI(){
+		if(player == null){
+			return;
+		}
 		if(player.IsDeath()){
 			GUI.skin.label.alignment = TextAnchor.MiddleCenter;
 			GUI.skin.label.fontSize = 40;
@@ -135,6 +150,13 @@ public class GUIManager : MonoBehaviour {
 
 	public void SetHp(int hp){
 		hpText.text = hp.ToString();
+	}
+
+	public void EnableMap(){
+		if(mapCamera == null){
+			return;
+		}
+		mapCamera.enabled = true;
 	}
 
 }

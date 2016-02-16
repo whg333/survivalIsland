@@ -16,7 +16,12 @@ public class FadeWhite : MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update(){
-	
+
 	}
+
+	void ShowMap(){
+		GUIManager.instance.EnableMap();
+	}
+
 }
 
