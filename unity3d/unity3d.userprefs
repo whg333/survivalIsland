@@ -1,18 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GUIManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Zombie.cs">
     <Files>
-      <File FileName="Assets\Scripts\Inventory.cs" Line="26" Column="17" />
-      <File FileName="Assets\Scripts\GUIManager.cs" Line="42" Column="64" />
-      <File FileName="Assets\Scripts\Player.cs" Line="29" Column="32" />
+      <File FileName="Assets\Scripts\MainMenuGUI.cs" Line="17" Column="2" />
+      <File FileName="Assets\Scripts\TriggerZone.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Inventory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GUIManager.cs" Line="54" Column="28" />
+      <File FileName="Assets\Scripts\Player.cs" Line="44" Column="33" />
       <File FileName="Assets\Scripts\UIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Zombie.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Zombie.cs" Line="93" Column="5" />
       <File FileName="Assets\Scripts\ZombieGenerator.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\CoconutThrower.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\StartGame.cs" Line="14" Column="20" />
-      <File FileName="Assets\Scripts\FadeWhite.cs" Line="23" Column="35" />
-      <File FileName="Assets\Scripts\MainMenuGUI.cs" Line="95" Column="11" />
-      <File FileName="Assets\Scripts\Fader.cs" Line="25" Column="14" />
+      <File FileName="Assets\Scripts\StartGame.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FadeWhite.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Fader.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WinGame.cs" Line="24" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

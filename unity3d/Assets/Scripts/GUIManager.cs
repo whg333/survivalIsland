@@ -53,6 +53,9 @@ public class GUIManager : MonoBehaviour {
 			hiScoreText = guiText [3];
 			scoreText = guiText [4];
 		}
+
+		HideCursor();
+		SetHiScore(hiScore);
 	}
 	
 	// Update is called once per frame
@@ -119,13 +122,16 @@ public class GUIManager : MonoBehaviour {
 			return;
 		}
 		if(player.IsDeath()){
+			//Destroy(player);
+			ShowCursor();
+
 			GUI.skin.label.alignment = TextAnchor.MiddleCenter;
 			GUI.skin.label.fontSize = 40;
-			GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Game Over");
+			GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "游戏结束");
 
 			GUI.skin.label.fontSize = 30;
-			if(GUI.Button(new Rect(Screen.width*0.5f - 150, Screen.height*0.75f, 300, 40), "Try again")){
-				UnityEngine.SceneManagement.SceneManager.LoadScene("demo");
+			if(GUI.Button(new Rect(Screen.width*0.5f - 150, Screen.height*0.75f, 300, 40), "再来一次")){
+				UnityEngine.SceneManagement.SceneManager.LoadScene("SurvivalIsland");
 			}
 		}
 	}
@@ -136,8 +142,12 @@ public class GUIManager : MonoBehaviour {
 
 		if(score > hiScore){
 			hiScore = score;
-			hiScoreText.text = "最高分: " + hiScore;
+			SetHiScore(hiScore);
 		}
+	}
+
+	void SetHiScore(int s){
+		hiScoreText.text = "最高分: " + s;
 	}
 
 	public void SubBullet(int subed){
@@ -157,6 +167,27 @@ public class GUIManager : MonoBehaviour {
 			return;
 		}
 		mapCamera.enabled = true;
+	}
+
+	public void DisableMap(){
+		if(mapCamera == null){
+			return;
+		}
+		mapCamera.enabled = false;
+	}
+
+	public void ShowCursor(){
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
+
+	public void HideCursor(){
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
+	public bool IsShowCursor(){
+		return Cursor.visible;
 	}
 
 }

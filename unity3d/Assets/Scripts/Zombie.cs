@@ -27,6 +27,8 @@ public class Zombie : MonoBehaviour {
 
 	private CapsuleCollider capsuleCollider;
 
+	private bool damagePlayer; //记录在attack范围内播放attack动画必定造成1点伤害
+
 	public void Init(ZombieGenerator generator){
 		generator.IncrCount();
 		this.generator = generator;
@@ -58,6 +60,7 @@ public class Zombie : MonoBehaviour {
 		AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 		if(InState(state, "idle")){
 			animator.SetBool("idle", false);
+			damagePlayer = false;
 
 			actTimer -= Time.deltaTime;
 			if(actTimer > 0){
@@ -76,7 +79,7 @@ public class Zombie : MonoBehaviour {
 
 			if(DistanceToPlayerLessEnough()){
 				animator.SetBool ("attack", true);
-				agent.ResetPath ();
+				agent.ResetPath();
 				return;
 			}else{
 				actTimer -= Time.deltaTime;
@@ -91,13 +94,18 @@ public class Zombie : MonoBehaviour {
 		}else if(InState(state, "attack")){
 			animator.SetBool("attack", false);
 			if (!DistanceToPlayerLessEnough()) {
-				animator.SetBool ("idle", true);
+				animator.SetBool("run", true);
 			} else {
 				//设定在此范围内造成的伤害为1点，太大范围的话因为update函数执行时处于attack状态比较长，所以会一直持续掉血
-				if (state.normalizedTime > 0.8f && state.normalizedTime < 0.815f) {
-					DamagePlayer ();
+				//或者可以使用一个布尔值记录仅此一次attack动画造成的掉血，与attack动画播放无关，但是体验不太好，最好体验是attack动画出手立即掉血
+				//print("state.normalizedTime="+state.normalizedTime);
+				if (!damagePlayer) {
+					if (state.normalizedTime > 0.61f && state.normalizedTime < 0.63f || state.normalizedTime > 0.63f) {
+						DamagePlayer ();
+					}
+				} else {
+					animator.SetBool("idle", true);
 					actTimer = 1;
-					animator.SetBool ("idle", true);
 				}
 
 				RotateToPlayer ();
@@ -105,7 +113,7 @@ public class Zombie : MonoBehaviour {
 
 		}else if(InState(state, "death")){
 			CapsuleColliderDisable();
-			if (AninatorPlayLargerThan (state, 2)) {
+			if (AninatorPlayLargerThan(state, 2)) {
 				OnDeath();
 			}
 		}
@@ -126,7 +134,7 @@ public class Zombie : MonoBehaviour {
 	}
 
 	bool DistanceToPlayerLessEnough(){
-		return DistanceToPlayerLessThan(1.9f);
+		return DistanceToPlayerLessThan(2f);
 	}
 
 	bool DistanceToPlayerLessThan(float distance){
@@ -151,9 +159,8 @@ public class Zombie : MonoBehaviour {
 	}
 
 	void DamagePlayer(){
-		animator.SetBool("idle", true);
-		actTimer = 2;
 		player.OnDamage(1);
+		damagePlayer = true;
 	}
 
 	void OnDamage(int damage){

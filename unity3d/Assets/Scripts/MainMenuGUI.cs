@@ -17,8 +17,7 @@ public class MainMenuGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Cursor.lockState = CursorLockMode.None;
-		Cursor.visible = true;
+		ShowCursor();
 
 		menuAreaNormalized = new Rect( 
 			menuArea.x*Screen.width - (menuArea.width*0.5f),
@@ -26,6 +25,11 @@ public class MainMenuGUI : MonoBehaviour {
 			menuArea.width, 
 			menuArea.height
 		);
+	}
+
+	private void ShowCursor(){
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 	
 	// Update is called once per frame

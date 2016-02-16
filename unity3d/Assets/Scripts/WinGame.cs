@@ -22,6 +22,7 @@ public class WinGame : MonoBehaviour {
 		Instantiate(winSequence);
 		yield return new WaitForSeconds(8.0f);
 		Instantiate(fader);
+		GUIManager.instance.DisableMap();
 	}
 
 }

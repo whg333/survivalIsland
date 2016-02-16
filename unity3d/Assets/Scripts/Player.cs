@@ -128,7 +128,9 @@ public class Player : MonoBehaviour {
 		shootTimer -= Time.deltaTime;
 		if(Input.GetButtonUp("Fire1") && shootTimer <= 0){
 			shootTimer = 0.1f;
-			GetComponent<AudioSource>().PlayOneShot(shootSound);
+			//GetComponent<AudioSource>().PlayOneShot(shootSound);
+			//使用下面的播放开枪音效是因为PlayOneShot会打断步行音效
+			AudioSource.PlayClipAtPoint(shootSound, transform.position);
 			GUIManager.instance.SubBullet(1);
 
 			RaycastHit hitInfo;
@@ -151,8 +153,15 @@ public class Player : MonoBehaviour {
 						particleSystem.startColor = Color.gray;
 					}
 				}
-
 			}
+
+			if(GUIManager.instance.IsShowCursor()){
+				GUIManager.instance.HideCursor();
+			}
+		}
+
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			GUIManager.instance.ShowCursor();
 		}
 	}
 

@@ -9,8 +9,8 @@ public class TriggerZone : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//doorLight = GameObject.FindWithTag("doorLight").GetComponent<Light>();
-		//doorLight.color = Color.red;
+		doorLight = GameObject.FindWithTag("doorLight").GetComponent<Light>();
+		doorLight.color = Color.red;
 	}
 	
 	// Update is called once per frame
@@ -39,6 +39,9 @@ public class TriggerZone : MonoBehaviour {
 	}
 
 	public static void ChangeDoorLight(Color c){
+		if(c == Color.green){
+			doorLight.range = 3.5f;
+		}
 		doorLight.color = c;
 	}
 
