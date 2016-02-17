@@ -26,6 +26,9 @@ public class Player : MonoBehaviour {
 	public AudioClip shootSound;
 	private float shootTimer;
 
+	public AudioClip[] hurtSounds;
+	public AudioClip deathSound;
+
 	// Use this for initialization
 	void Start () {
 		//characterController = GetComponent<CharacterController>();
@@ -115,8 +118,11 @@ public class Player : MonoBehaviour {
 
 		GUIManager.instance.SetHp(hp);
 
-		if(IsDeath()){
+		if (IsDeath()) {
+			GetComponent<AudioSource>().PlayOneShot(deathSound);
 			Cursor.lockState = CursorLockMode.None;
+		} else {
+			GetComponent<AudioSource>().PlayOneShot(hurtSounds[Random.Range(0, 3)]);
 		}
 	}
 

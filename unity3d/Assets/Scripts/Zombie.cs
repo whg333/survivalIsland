@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent (typeof (NavMeshAgent))]
 [RequireComponent (typeof (Animator))]
 [RequireComponent (typeof (CapsuleCollider))]
+[RequireComponent (typeof (AudioSource))]
 public class Zombie : MonoBehaviour {
 
 	//玩家
@@ -28,6 +29,13 @@ public class Zombie : MonoBehaviour {
 	private CapsuleCollider capsuleCollider;
 
 	private bool damagePlayer; //记录在attack范围内播放attack动画必定造成1点伤害
+
+	public AudioClip attackSound;
+	public AudioClip deathSound;
+
+	//僵尸血量为0设置death死亡状态true后有个转换状态的时间，所以不在death为true时发出死亡声效，
+	//实际上僵尸会在死亡后一段时间才倒下
+	private bool isPlayDeathSound;
 
 	public void Init(ZombieGenerator generator){
 		generator.IncrCount();
@@ -100,8 +108,11 @@ public class Zombie : MonoBehaviour {
 				//或者可以使用一个布尔值记录仅此一次attack动画造成的掉血，与attack动画播放无关，但是体验不太好，最好体验是attack动画出手立即掉血
 				//print("state.normalizedTime="+state.normalizedTime);
 				if (!damagePlayer) {
+					if(IsAttackSound()){
+						GetComponent<AudioSource>().PlayOneShot(attackSound);
+					}
 					if (state.normalizedTime > 0.61f && state.normalizedTime < 0.63f || state.normalizedTime > 0.63f) {
-						DamagePlayer ();
+						DamagePlayer();
 					}
 				} else {
 					animator.SetBool("idle", true);
@@ -112,11 +123,20 @@ public class Zombie : MonoBehaviour {
 			}
 
 		}else if(InState(state, "death")){
+			if(!isPlayDeathSound){
+				GetComponent<AudioSource>().PlayOneShot(deathSound);
+				isPlayDeathSound = true;
+			}
 			CapsuleColliderDisable();
 			if (AninatorPlayLargerThan(state, 2)) {
 				OnDeath();
 			}
 		}
+	}
+
+	bool IsAttackSound(){
+		int randomNum = Random.Range(1, 100);
+		return randomNum >= 25 && randomNum <= 28;
 	}
 
 	bool InState(AnimatorStateInfo state, string stateStr){
