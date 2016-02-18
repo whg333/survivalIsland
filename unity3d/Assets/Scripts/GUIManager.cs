@@ -144,6 +144,9 @@ public class GUIManager : MonoBehaviour {
 		if(player.IsDeath()){
 			//Destroy(player);
 			ShowCursor();
+			if(IsEnableGunCrosshairImg()){
+				DisableGunCrosshairImg();
+			}
 
 			GUI.skin.label.alignment = TextAnchor.MiddleCenter;
 			GUI.skin.label.fontSize = 40;
