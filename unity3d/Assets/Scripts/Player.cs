@@ -127,12 +127,17 @@ public class Player : MonoBehaviour {
 	}
 
 	void Shoot(){
-		if(!HasWeapon()){
+		if(!HasWeapon() || GUIManager.IsEnableCrosshairImg()){
 			return;
 		}
 
 		shootTimer -= Time.deltaTime;
 		if(Input.GetButtonUp("Fire1") && shootTimer <= 0){
+
+			if(!GUIManager.IsEnableGunCrosshairImg()){
+				GUIManager.EnableGunCrosshairImg();
+			}
+
 			shootTimer = 0.1f;
 			//GetComponent<AudioSource>().PlayOneShot(shootSound);
 			//使用下面的播放开枪音效是因为PlayOneShot会打断步行音效
@@ -141,8 +146,9 @@ public class Player : MonoBehaviour {
 
 			RaycastHit hitInfo;
 
+			//不以枪支弹头muzzlepoint.position作为射击准心，而是以屏幕中心点作为准心射击
 			bool hit = Physics.Raycast(
-				muzzlepoint.position, 
+				cameraTransform.position, 
 				cameraTransform.TransformDirection(Vector3.forward), 
 				out hitInfo, 100, layerMask);
 			

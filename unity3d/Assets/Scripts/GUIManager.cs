@@ -8,6 +8,7 @@ public class GUIManager : MonoBehaviour {
 	private static GUITexture powerImg;
 	private static GUITexture crosshairImg;
 	private static GUITexture matchImg;
+	private static GUITexture gunCrosshairImg;
 
 	private float hintsTimer = 0.0f;
 	private static GUIText hintsText;
@@ -43,6 +44,7 @@ public class GUIManager : MonoBehaviour {
 		powerImg = hudGUIs[0];
 		crosshairImg = hudGUIs[1];
 		matchImg = hudGUIs[2];
+		gunCrosshairImg = hudGUIs[3];
 
 		GUIText[] guiText = GetComponentsInChildren<GUIText>();
 		hintsText = guiText[0];
@@ -101,12 +103,30 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
+	public static bool IsEnableCrosshairImg(){
+		return crosshairImg.enabled;
+	}
+
 	public static void EnableCrosshairImg(){
 		crosshairImg.enabled = true;
+		gunCrosshairImg.enabled = false;
 	}
 
 	public static void DisableCrosshairImg(){
 		crosshairImg.enabled = false;
+		gunCrosshairImg.enabled = true;
+	}
+
+	public static bool IsEnableGunCrosshairImg(){
+		return gunCrosshairImg.enabled;
+	}
+
+	public static void EnableGunCrosshairImg(){
+		gunCrosshairImg.enabled = true;
+	}
+
+	public static void DisableGunCrosshairImg(){
+		gunCrosshairImg.enabled = false;
 	}
 
 	public static void EnableMatchImg(){

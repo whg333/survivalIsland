@@ -40,7 +40,7 @@ public class TriggerZone : MonoBehaviour {
 
 	public static void ChangeDoorLight(Color c){
 		if(c == Color.green){
-			doorLight.range = 3.5f;
+			doorLight.range -= 2f;
 		}
 		doorLight.color = c;
 	}
