@@ -130,15 +130,15 @@ public class Player : MonoBehaviour {
 	}
 
 	void Shoot(){
-		if(!HasWeapon() || GUIManager.IsEnableCrosshairImg()){
+		if(!HasWeapon() || GUIManager.instance.IsEnableCrosshairImg()){
 			return;
 		}
 
 		shootTimer -= Time.deltaTime;
 		if(Input.GetButtonUp("Fire1") && shootTimer <= 0){
 
-			if(!GUIManager.IsEnableGunCrosshairImg()){
-				GUIManager.EnableGunCrosshairImg();
+			if(!GUIManager.instance.IsEnableGunCrosshairImg()){
+				GUIManager.instance.EnableGunCrosshairImg();
 			}
 
 			shootTimer = 0.1f;

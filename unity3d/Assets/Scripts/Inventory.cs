@@ -33,14 +33,14 @@ public class Inventory : MonoBehaviour {
 	}
 
 	void PickUpCell(){
-		GUIManager.CheckAndActivatePowerImg();
+		GUIManager.instance.CheckAndActivatePowerImg();
 
 		//GetComponent<AudioSource>().PlayOneShot(collectSound);
 		AudioSource.PlayClipAtPoint(collectSound, transform.position);
 
 		charge++;
 
-		GUIManager.ChangePowerImg(hudCharge[charge]);
+		GUIManager.instance.ChangePowerImg(hudCharge[charge]);
 		meter.material.mainTexture = meterCharge[charge];
 
 		if(FinishedCollectCharge()){
@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour {
 	void PickUpMatch(){
 		hadMatch = true;
 		AudioSource.PlayClipAtPoint(collectSound, transform.position);
-		GUIManager.EnableMatchImg();
+		GUIManager.instance.EnableMatchImg();
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit col){
@@ -69,7 +69,7 @@ public class Inventory : MonoBehaviour {
 				if (hadMatch) {
 					LightFire (col.gameObject);
 				} else {
-					GUIManager.ShowHints ("不能点燃火把。。。\n\n因为没有找到火柴。。。\n\n继续寻找火柴来点燃火把求救。。。");
+					GUIManager.instance.ShowHints ("不能点燃火把。。。\n\n因为没有找到火柴。。。\n\n继续寻找火柴来点燃火把求救。。。");
 				}
 			}
 		}
@@ -83,7 +83,7 @@ public class Inventory : MonoBehaviour {
 			em.enabled = true;
 		}
 		campfire.GetComponent<AudioSource>().Play();
-		GUIManager.DestoryMatchImg();
+		GUIManager.instance.DestoryMatchImg();
 		hadMatch = false;
 		hadLightFire = true;
 		winObj.SendMessage("GameOver");

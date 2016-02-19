@@ -5,16 +5,16 @@ public class GUIManager : MonoBehaviour {
 
 	public static GUIManager instance;
 
-	private static GUITexture powerImg;
-	private static GUITexture crosshairImg;
-	private static GUITexture matchImg;
-	private static GUITexture gunCrosshairImg;
+	private GUITexture powerImg;
+	private GUITexture crosshairImg;
+	private GUITexture matchImg;
+	private GUITexture gunCrosshairImg;
 
 	private float hintsTimer = 0.0f;
-	private static GUIText hintsText;
+	private GUIText hintsText;
 
 	private int score;
-	private static int hiScore;
+	private int hiScore;
 
 	private int bullet;
 
@@ -44,7 +44,9 @@ public class GUIManager : MonoBehaviour {
 		powerImg = hudGUIs[0];
 		crosshairImg = hudGUIs[1];
 		matchImg = hudGUIs[2];
-		gunCrosshairImg = hudGUIs[3];
+		if (mapCamera != null) {
+			gunCrosshairImg = hudGUIs [3];
+		}
 
 		GUIText[] guiText = GetComponentsInChildren<GUIText>();
 		hintsText = guiText[0];
@@ -75,13 +77,13 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-	public static void CheckAndActivatePowerImg(){
+	public void CheckAndActivatePowerImg(){
 		if(!powerImg.enabled){
 			powerImg.enabled = true;
 		}
 	}
 
-	public static void CheackAndDestoryPowerImg(){
+	public void CheackAndDestoryPowerImg(){
 		if (powerImg != null && powerImg.enabled) {
 			Destroy(powerImg);
 			//应该在收集完毕能源后门上的灯直接变绿，而不是等等碰撞的时候才变绿
@@ -89,51 +91,51 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-	public static void ChangePowerImg(Texture2D texture){
+	public void ChangePowerImg(Texture2D texture){
 		//chargeHudGUI.texture = hudCharge[charge];
 		//print(powerImg);
 		//下面不能写成powerImg.material.mainTexture
 		powerImg.texture = texture;
 	}
 
-	public static void ShowHints(string hints){
+	public void ShowHints(string hints){
 		hintsText.text = hints;
 		if(!hintsText.enabled){
 			hintsText.enabled = true;
 		}
 	}
 
-	public static bool IsEnableCrosshairImg(){
+	public bool IsEnableCrosshairImg(){
 		return crosshairImg.enabled;
 	}
 
-	public static void EnableCrosshairImg(){
+	public void EnableCrosshairImg(){
 		crosshairImg.enabled = true;
 		gunCrosshairImg.enabled = false;
 	}
 
-	public static void DisableCrosshairImg(){
+	public void DisableCrosshairImg(){
 		crosshairImg.enabled = false;
 		gunCrosshairImg.enabled = true;
 	}
 
-	public static bool IsEnableGunCrosshairImg(){
+	public bool IsEnableGunCrosshairImg(){
 		return gunCrosshairImg.enabled;
 	}
 
-	public static void EnableGunCrosshairImg(){
+	public void EnableGunCrosshairImg(){
 		gunCrosshairImg.enabled = true;
 	}
 
-	public static void DisableGunCrosshairImg(){
+	public void DisableGunCrosshairImg(){
 		gunCrosshairImg.enabled = false;
 	}
 
-	public static void EnableMatchImg(){
+	public void EnableMatchImg(){
 		matchImg.enabled = true;
 	}
 
-	public static void DestoryMatchImg(){
+	public void DestoryMatchImg(){
 		Destroy(matchImg);
 	}
 
@@ -170,6 +172,9 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	void SetHiScore(int s){
+		if(hiScoreText == null){
+			return;
+		}
 		hiScoreText.text = "最高分: " + s;
 	}
 

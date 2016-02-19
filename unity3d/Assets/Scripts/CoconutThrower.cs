@@ -33,12 +33,12 @@ public class CoconutThrower : MonoBehaviour {
 
 	public static void CanThrow(){
 		canThrow = true;
-		GUIManager.EnableCrosshairImg();
+		GUIManager.instance.EnableCrosshairImg();
 	}
 
 	public static void CannotThrow(){
 		canThrow = false;
-		GUIManager.DisableCrosshairImg();
+		GUIManager.instance.DisableCrosshairImg();
 	}
 
 }
