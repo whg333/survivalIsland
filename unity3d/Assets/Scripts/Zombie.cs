@@ -30,8 +30,8 @@ public class Zombie : MonoBehaviour {
 
 	private bool damagePlayer; //记录在attack范围内播放attack动画必定造成1点伤害
 
-	public AudioClip attackSound;
-	public AudioClip deathSound;
+	public AudioClip[] attackSounds;
+	public AudioClip[] deathSounds;
 
 	//僵尸血量为0设置death死亡状态true后有个转换状态的时间，所以不在death为true时发出死亡声效，
 	//实际上僵尸会在死亡后一段时间才倒下
@@ -109,7 +109,7 @@ public class Zombie : MonoBehaviour {
 				//print("state.normalizedTime="+state.normalizedTime);
 				if (!damagePlayer) {
 					if(IsAttackSound()){
-						GetComponent<AudioSource>().PlayOneShot(attackSound);
+						GetComponent<AudioSource>().PlayOneShot(attackSounds[Random.Range(0, 3)]);
 					}
 					if (state.normalizedTime > 0.61f && state.normalizedTime < 0.63f || state.normalizedTime > 0.63f) {
 						DamagePlayer();
@@ -124,7 +124,7 @@ public class Zombie : MonoBehaviour {
 
 		}else if(InState(state, "death")){
 			if(!isPlayDeathSound){
-				GetComponent<AudioSource>().PlayOneShot(deathSound);
+				GetComponent<AudioSource>().PlayOneShot(deathSounds[Random.Range(0, 3)]);
 				isPlayDeathSound = true;
 			}
 			CapsuleColliderDisable();

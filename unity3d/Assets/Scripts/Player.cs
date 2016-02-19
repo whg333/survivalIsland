@@ -29,6 +29,8 @@ public class Player : MonoBehaviour {
 	public AudioClip[] hurtSounds;
 	public AudioClip deathSound;
 
+	public GUITexture damageAnim;
+
 	// Use this for initialization
 	void Start () {
 		//characterController = GetComponent<CharacterController>();
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void OnDamage(int damage){
+		Instantiate(damageAnim);
 		hp -= damage;
 
 		GUIManager.instance.SetHp(hp);
